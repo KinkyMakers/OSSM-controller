@@ -1,0 +1,24 @@
+{
+    "name": "ArdUtils",
+    "version": "0.0.1",
+    "description": "A collection of modules for Arduino sensing and motion control",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ChisholmKyle/ArduinoUtilities.git"
+    },
+    "authors":
+    [
+      {
+        "name": "Kyle Chisholm",
+        "email": "dev@kylechisholm.ca",
+        "url": "https://www.kylechisholm.ca/contact.php"
+      }
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "FastLED-esp32SPI": "https://github.com/ChisholmKyle/FastLED.git",
+        "Encoder-latest": "https://github.com/PaulStoffregen/Encoder.git"
+    },
+    "frameworks": "arduino",
+    "platforms": [ "espressif32", "amtelavr" ]
+}
