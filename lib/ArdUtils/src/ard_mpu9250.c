@@ -162,6 +162,8 @@ ArdMpu9250Config ard_mpu9250_default_config()
 
     config.mag_rate = EARD_MPU9250_MRATE_8HZ;
     config.mag_precision = EARD_MPU9250_MPRECISION_16BITS;
+
+    return config;
 }
 
 eArdMpu9250ConfigResult ard_mpu9250_configure(ArdMpu9250 *imu, const ArdMpu9250Config *config)
@@ -503,7 +505,7 @@ int ard_mpu9250_fifo_read(const uint8_t address, ArdMpu9250Fifo *fifo, const uin
     (*frames_read) = 0;
     // get the fifo size
     uint8_t buffer[2];
-    ard_i2c_master_read(ARD_MPU9250_FIFO_COUNT, 2, buffer);
+    ard_i2c_master_read(ARD_MPU9250_FIFO_COUNT, buffer, 2);
     const uint16_t fifo_size = (((uint16_t)(buffer[0] & 0x0F)) << 8) + (((uint16_t)buffer[1]));
 
     // write index
@@ -550,7 +552,7 @@ int ard_mpu9250_fifo_read(const uint8_t address, ArdMpu9250Fifo *fifo, const uin
             out[write_index + 1] = (((int16_t)fifo->buffer[read_index + 2]) << 8) | fifo->buffer[read_index + 3];
             out[write_index + 2] = (((int16_t)fifo->buffer[read_index + 4]) << 8) | fifo->buffer[read_index + 5];
             write_index += 3;
-            read_index;
+            read_index += 7;
         }
         (*frames_read) += 1;
     }
@@ -660,7 +662,6 @@ eArdMpu9250Status ard_mpu9250_read_counts(ArdMpu9250 *imu)
     }
 
     // Swap MSB and LSB into a signed 16-bit value (little endian)
-    size_t index = 0;
     imu->counts.accel_x = ((int16_t)raw[1] << 8) | raw[0];
     imu->counts.accel_y = ((int16_t)raw[3] << 8) | raw[2];
     imu->counts.accel_z = ((int16_t)raw[5] << 8) | raw[4];
@@ -794,8 +795,8 @@ eArdMpu9250CalibrationResult ard_mpu9250_calibrate_gyro(ArdMpu9250 *imu, uint32_
 
     // read
 
-    int32_t gyro_bias_accumulator[3];
-    size_t samples = (duration / ARD_MPU9250_DIVIDER_TO_STEP_MICROS(config.rate_divider));
+    // int32_t gyro_bias_accumulator[3];
+    // size_t samples = (duration / ARD_MPU9250_DIVIDER_TO_STEP_MICROS(config.rate_divider));
 
     // TODO(ChisholmKyle): wait for data, capture FIFO, and calibrate gyro
 

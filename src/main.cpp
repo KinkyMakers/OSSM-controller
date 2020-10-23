@@ -230,9 +230,9 @@ static ArdLedParameters led_setup(void)
 // -------
 
 #define STEPPER_MIN_PULSE_STEP_SIZE 100U
-#define STEPPER_PULSES_PER_REV 6400
+#define STEPPER_PULSES_PER_REV 1600
 #define STEPPER_MAX_DEGREES_PER_SEC 180.0
-#define STEPPER_COMMAND_DELAY_STEPS 2
+#define STEPPER_COMMAND_DELAY_STEPS 3
 
 #ifndef STEPPER_PIN_PULSE
 #define STEPPER_PIN_PULSE 4
@@ -497,6 +497,18 @@ void loop()
         const double command = ard_spline_traj_evaluate_position(&g_traj);
         // produce test commands
         ard_stepper_produce_command(&g_stepper, &command, 1);
+
+        // if (g_traj.index < g_traj.num_steps)
+        // {
+        //     const uint32_t pulses = test_ard_get_pulses_counted();
+        //     Serial.print("Traj (command, enc, pulses): (");
+        //     Serial.print(command);
+        //     Serial.print(", ");
+        //     Serial.print((int)g_stepper.encoder.count);
+        //     Serial.print(", ");
+        //     Serial.print(pulses);
+        //     Serial.println(")");
+        // }
 
         // stepper
         // -------

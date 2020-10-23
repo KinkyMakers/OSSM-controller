@@ -81,6 +81,9 @@ extern "C"
     int ard_encoder_set(ArdEncoder *enc, const uint8_t counter_resolution_bits,
                                const uint32_t counts_per_rev, const double value_per_rev);
 
+    void ard_encoder_set_32bit(ArdEncoder *enc, const uint32_t counts_per_rev,
+                                  const double value_per_rev);
+
     /**
      * @brief Reset encoder to value and counts
      *

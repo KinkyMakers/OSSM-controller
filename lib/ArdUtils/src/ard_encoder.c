@@ -9,7 +9,7 @@ static int32_t pow2_int(uint8_t n)
     return out;
 }
 
-void ard_encoder_set_32bit_signed(ArdEncoder *enc, const uint32_t counts_per_rev,
+void ard_encoder_set_32bit(ArdEncoder *enc, const uint32_t counts_per_rev,
                                   const double value_per_rev)
 {
     enc->value = 0.0;

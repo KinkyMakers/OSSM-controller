@@ -31,7 +31,7 @@ int ard_stepper_alloc(ArdStepper *stepper, const ArdStepperParameters *parameter
     stepper->enabled = false;
 
     // command encoder
-    ard_encoder_set(&stepper->encoder, 64, parameters->pulses_per_rev, parameters->units_per_rev);
+    ard_encoder_set_32bit(&stepper->encoder, parameters->pulses_per_rev, parameters->units_per_rev);
 
     // check min period
     const uint32_t min_pulse_period =

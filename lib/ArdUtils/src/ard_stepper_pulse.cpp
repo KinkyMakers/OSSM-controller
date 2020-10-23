@@ -90,9 +90,9 @@ static void ard_stepper_guard_off() { interrupts(); }
 hw_timer_t *s_timer = NULL;
 portMUX_TYPE s_timer_mutex = portMUX_INITIALIZER_UNLOCKED;
 
-static void ard_stepper_guard_on() { portENTER_CRITICAL_ISR(&s_timer_mutex); }
+static void ard_stepper_guard_on() { portENTER_CRITICAL(&s_timer_mutex); }
 
-static void ard_stepper_guard_off() { portEXIT_CRITICAL_ISR(&s_timer_mutex); }
+static void ard_stepper_guard_off() { portEXIT_CRITICAL(&s_timer_mutex); }
 
 static void IRAM_ATTR ard_stepper_isr_pulse_train()
 {
